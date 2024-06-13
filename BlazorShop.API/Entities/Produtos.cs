@@ -1,4 +1,6 @@
-﻿namespace BlazorShop.API.Entities
+﻿using System.Collections.ObjectModel;
+
+namespace BlazorShop.API.Entities
 {
     public class Produtos
     {
@@ -8,6 +10,11 @@
         public string ImagemUrl { get; set; } = string.Empty;
         public decimal Preco { get; set; }
         public int Quantidade { get; set; } 
+
+        public int CategoriaId { get; set; }
+
+        public Collection<CarrinhoItem> Itens { get; set;}
+             = new Collection<CarrinhoItem>();
 
     }
 }

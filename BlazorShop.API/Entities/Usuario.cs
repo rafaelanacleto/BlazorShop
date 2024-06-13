@@ -9,5 +9,7 @@ namespace BlazorShop.API.Entities
     {
         public int Id { get; set; }
         public string? NomeUsuario { get; set; }
+
+        public Carrinho? Carrinho{ get; set; } = null;
     }
 }
