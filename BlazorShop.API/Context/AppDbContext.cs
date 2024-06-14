@@ -34,7 +34,7 @@ namespace BlazorShop.API.Context
                 Id = 1,
                 Nome = "Beleza",
                 Descricao = "Balse de Beleza",
-                ImagemUrl = "/Imagens/Beleza/Beleza1.png",
+                ImagemUrl = "/Imagens/Beleza/Beleza1.jpg",
                 Preco = 100,
                 Quantidade = 40,
                 CategoriaId = 1,
