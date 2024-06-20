@@ -26,7 +26,21 @@ namespace BlazorShop.API.Context
             {
                 Id = 1,
                 Nome = "Beleza",
-                IconCSS = "Balde"
+                IconCSS = "fas fa-spa"
+            });
+
+            modelBuilder.Entity<Categoria>().HasData(new Categoria
+            {
+                Id = 2,
+                Nome = "Moveis",
+                IconCSS = "fas fa-couch"
+            });
+
+            modelBuilder.Entity<Categoria>().HasData(new Categoria
+            {
+                Id = 3,
+                Nome = "Eletronicos",
+                IconCSS = "fa fa-headphones"
             });
 
             modelBuilder.Entity<Produtos>().HasData(new Produtos
@@ -35,12 +49,48 @@ namespace BlazorShop.API.Context
                 Nome = "Beleza",
                 Descricao = "Balse de Beleza",
                 ImagemUrl = "/Imagens/Beleza/Beleza1.jpg",
-                Preco = 100,
+                Preco = 10,
                 Quantidade = 40,
                 CategoriaId = 1,
             });
-        }
 
+            modelBuilder.Entity<Produtos>().HasData(new Produtos
+            {
+                Id = 2,
+                Nome = "Fones",
+                Descricao = "Fone Bluetofh",
+                ImagemUrl = "/Imagens/Eletronicos/fones1.jpg",
+                Preco = 300,
+                Quantidade = 2,
+                CategoriaId = 3,
+            });
+
+            modelBuilder.Entity<Usuario>().HasData(new Usuario
+            {
+                Id = 1,
+                NomeUsuario = "Rafael"
+            });
+
+            modelBuilder.Entity<Usuario>().HasData(new Usuario
+            {
+                Id = 2,
+                NomeUsuario = "Alice"
+            });
+
+            //carrinho do user
+            modelBuilder.Entity<Carrinho>().HasData(new Carrinho
+            {
+                Id = 1,
+                UsuarioId = 1,
+            });
+            modelBuilder.Entity<Carrinho>().HasData(new Carrinho
+            {
+                Id = 2,
+                UsuarioId = 2,
+            });
+
+
+        }
 
     }
 }
