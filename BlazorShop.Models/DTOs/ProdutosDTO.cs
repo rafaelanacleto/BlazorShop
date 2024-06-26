@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorShop.Models.DTOs
 {
-    public class Produtos
+    public class ProdutosDTO
     {
         public int Id { get; set; }
         public string Nome { get; set; } = string.Empty;

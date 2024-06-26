@@ -14,4 +14,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorShop.Models\BlazorShop.Models.csproj" />
+  </ItemGroup>
+
 </Project>
