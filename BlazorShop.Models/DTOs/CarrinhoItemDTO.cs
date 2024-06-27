@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BlazorShop.Models.DTOs
+﻿namespace BlazorShop.Models.DTOs
 {
     public class CarrinhoItemDTO
     {
@@ -12,5 +6,14 @@ namespace BlazorShop.Models.DTOs
         public int CarrinhoId { get; set; }
         public int ProdutoId { get; set; }
         public int Quantidade { get; set; }
+
+        public string ProdutoNome { get; set; } = string.Empty;
+        public string ProdutoDescricao { get; set; } = string.Empty;
+        public string ProdutoImagemURL { get; set; } = string.Empty;
+
+        public decimal Preco { get; set; }
+        public decimal PrecoTotal { get; set; }
+
+
     }
 }
