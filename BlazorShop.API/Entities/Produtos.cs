@@ -14,6 +14,8 @@ namespace BlazorShop.API.Entities
         public int Quantidade { get; set; } 
         public int CategoriaId { get; set; }
 
+        public Categoria? Categoria { get; set; }
+
         public Collection<CarrinhoItem> Itens { get; set;}
              = new Collection<CarrinhoItem>();
 

@@ -10,6 +10,6 @@ namespace BlazorShop.API.Entities
         public string Nome { get; set; } = string.Empty;
         public string IconCSS { get; set; } = string.Empty;
 
-        public Collection<Produtos> Produtos { get; set; } = new Collection<Produtos>();
+        //public Collection<Produtos> Produtos { get; set; } = new Collection<Produtos>();
     }
 }
