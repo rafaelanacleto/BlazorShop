@@ -1,4 +1,5 @@
 using BlazorShop.API.Context;
+using BlazorShop.API.Mappings;
 using BlazorShop.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,9 @@ builder.Services.AddDbContext<AppDbContext>(op =>
                             op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+
+builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
+
 
 var app = builder.Build();
 
