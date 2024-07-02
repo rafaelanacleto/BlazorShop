@@ -30,6 +30,12 @@ namespace BlazorShop.API.Controllers
             try
             {
                 var produtos = await _productService.GetAll();
+
+                if (produtos == null)
+                {
+                    return NotFound();
+                }
+
                 return Ok(produtos);
             }
             catch (Exception ex)
@@ -44,6 +50,10 @@ namespace BlazorShop.API.Controllers
             try
             {
                 var product = await _productService.GetById(id);
+                if (product == null)
+                {
+                    return NotFound();
+                }
                 return Ok(product);
             }
             catch (System.Exception ex)
