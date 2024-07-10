@@ -17,18 +17,18 @@
 }
 else
 {
-    var prodByCategoria = from produtos in Produtos
-                          group produtos by produtos.CategoriaId into prodPorCatGrupo
-                          orderby prodPorCatGrupo.Key
-                          select prodPorCatGrupo;
+    var produtosPorCategoria = from produto in Produtos
+                               group produto by produto.CategoriaId into prodPorCatGrupo
+                               orderby prodPorCatGrupo.Key
+                               select prodPorCatGrupo;
 
-    foreach (var item in prodByCategoria)
+    @foreach (var prodGrupo in produtosPorCategoria)
     {
-        <h4>@item.FirstOrDefault(p => p.CategoriaId == item.Key).CategoriaNome</h4>
-
+        <h4>@prodGrupo.FirstOrDefault(pg => pg.CategoriaId == prodGrupo.Key).Categoria.Nome</h4>
         <div class="row mt-3">
-            <ExibirProdutos Produtos=@item></ExibirProdutos>
+            <ExibirProdutos Produtos="@prodGrupo"></ExibirProdutos>
         </div>
+        <hr class="mb-2" />
     }
 }
 
