@@ -29,5 +29,22 @@ namespace BlazorShop.Web.Services
                 throw;
             }
         }
+
+        public async Task<ProdutoDTO> GetProdutoById(int id)
+        {
+            try
+            {
+                var prod = await _restClient.GetById(id);
+
+                return prod;
+            }
+            catch (System.Exception)
+            {                
+                throw;
+            }
+            
+        }   
+
+
     }
 }

@@ -9,6 +9,7 @@ namespace BlazorShop.Web.Services
     public interface IProdutoService
     {
         Task<IEnumerable<ProdutosDTO>> GetProdutos();
+        Task<ProdutosDTO> GetProdutoById(int id);
         
     }
 }
