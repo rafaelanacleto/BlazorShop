@@ -44,7 +44,7 @@ namespace BlazorShop.API.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProdutosById(int id)    
         {
             try
