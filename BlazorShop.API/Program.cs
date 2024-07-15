@@ -29,7 +29,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(op => 
-                            op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                            op.UseSqlServer(builder.Configuration.GetConnectionString("Defaultconnection")));
 
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 

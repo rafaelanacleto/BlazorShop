@@ -13,7 +13,7 @@ namespace BlazorShop.Models.DTOs
         public string Descricao { get; set; } = string.Empty;
         public string ImagemUrl { get; set; } = string.Empty;
        
-        public decimal? Preco { get; set; }
+        public decimal Preco { get; set; }
         public int Quantidade { get; set; }
         public int CategoriaId { get; set; }
         public CategoriaDTO? Categoria { get; set; }
