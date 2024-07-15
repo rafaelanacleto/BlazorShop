@@ -1,0 +1,64 @@
+@page "/produtoDetalhes/{Id:int}"
+@using BlazorShop.Models.DTOs
+@using BlazorShop.Web.Services
+
+<PageTitle>Produto Detalhes</PageTitle>
+
+@if(Produto is null && MensagemErro is null)
+{
+    <ExibirSpinner />
+}
+else 
+{
+    <div>
+        <h3 class="mb-5">Detalhes do Produto</h3> 
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <img src="@Produto.ImagemUrl" alt="img" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <h2>@Produto.Nome</h2>
+                <p class="mb-4">@Produto.Descricao</p>
+                <p class="mb-4">
+                    <b>
+                        @Produto.Preco.ToString("C")&nbsp; (@Produto.Quantidade items)
+                    </b>
+                </p>
+                <div>
+                    <button class="btn btn-success">Incluir Carrinho</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@code{
+
+    private List<CarrinhoItemDTO>? CarrinhoCompraItens { get; set; }
+
+    [Inject]
+    public IProdutoService? service {get; set;}    
+
+    [Parameter]
+    public int Id { get; set; }
+
+    public ProdutosDTO? Produto { get; set; }
+
+    public string? MensagemErro { get; set; } = String.Empty;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+           Produto = await service.GetProdutoById(Id);
+        }
+        catch (Exception ex)
+        {
+            MensagemErro = ex.Message;
+        }
+    }
+
+
+}
