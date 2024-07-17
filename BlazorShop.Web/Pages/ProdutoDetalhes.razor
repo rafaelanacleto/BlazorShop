@@ -29,7 +29,8 @@ else
                     </b>
                 </p>
                 <div>
-                    <button class="btn btn-success">Incluir Carrinho</button>
+                    <button class="btn btn-success">Incluir Carrinho</button>       &nbsp;
+                    <button class="btn btn-warning" @onclick=GetDetalhes>Voltar</button>
                 </div>
             </div>
         </div>
@@ -44,6 +45,9 @@ else
     [Inject]
     public IProdutoService? service {get; set;}    
 
+    [Inject]
+    private NavigationManager _navigationManager { get; set; }
+
     [Parameter]
     public int Id { get; set; }
 
@@ -56,7 +60,7 @@ else
     {
         try
         {
-           Produto = await service.GetProdutoById(Id);
+            Produto = await service.GetProdutoById(Id);
         }
         catch (Exception ex)
         {
@@ -64,9 +68,14 @@ else
         }
     }
 
+    private async Task GetDetalhes()
+    {
+        _navigationManager.NavigateTo($"/produto");
+    }
+
     // private async Task<ProdutoDto> GetProdutoPorId(int id)
     // {
-    //     var produtosDto = await GerenciaProdutosLocalStorageService.GetCollection();
+    //     var produtosDto = await GerenciaProdutosLocalStorageService.GetCollection(); // _navigationManager.NavigateTo($"ListaSolicitacao");
 
     //     if (produtosDto != null)
     //     {
