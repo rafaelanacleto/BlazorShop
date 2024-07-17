@@ -8,10 +8,14 @@
 {
     <ExibirSpinner />
 }
+else if (MensagemErro is not null)
+{
+    <ExibirErro MensagemErro="@MensagemErro"></ExibirErro>
+}
 else 
 {
     <div>
-        <h3 class="mb-5">Detalhes do Produto - @Produto.Nome</h3> 
+        <h3 class="mb-5">Detalhes do Produto </h3> 
         <div class="row">
             <div class="col-md-6 mb-4">
                 <img src="@Produto.ImagemUrl" alt="img" class="img-fluid">
@@ -45,7 +49,7 @@ else
 
     public ProdutosDTO? Produto { get; set; }
 
-    public string? MensagemErro { get; set; } = String.Empty;
+    public string? MensagemErro { get; set; }
 
 
     protected override async Task OnInitializedAsync()
@@ -59,6 +63,17 @@ else
             MensagemErro = ex.Message;
         }
     }
+
+    // private async Task<ProdutoDto> GetProdutoPorId(int id)
+    // {
+    //     var produtosDto = await GerenciaProdutosLocalStorageService.GetCollection();
+
+    //     if (produtosDto != null)
+    //     {
+    //         return produtosDto.SingleOrDefault(p => p.Id == id);
+    //     }
+    //     return null;
+    // }
 
 
 }
