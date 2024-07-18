@@ -1,10 +1,18 @@
-﻿using BlazorShop.API.Entities;
+﻿using BlazorShop.API.Context;
+using BlazorShop.API.Entities;
 using BlazorShop.Models.DTOs;
 
 namespace BlazorShop.API.Repositories
 {
     public class CarrinhoCompraRepository : ICarrinhoCompraRepository
     {
+        private readonly AppDbContext _appDbContext;
+
+        public CarrinhoCompraRepository(AppDbContext appDbContext)
+        {
+            _appDbContext = appDbContext;
+        }
+
         public Task<CarrinhoItem> AdicionaItem(CarrinhoItemDTO itemDTO)
         {
             throw new NotImplementedException();
