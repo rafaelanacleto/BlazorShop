@@ -13,6 +13,9 @@ namespace BlazorShop.API.Mappings
         public DomainToDTOMappingProfile()
         {
             CreateMap<ProdutosDTO, Produtos>().ReverseMap();
+            CreateMap<Carrinho, CarrinhoDTO>().ReverseMap();
+            CreateMap<CarrinhoItem, CarrinhoItemDTO>().ReverseMap();
+            
         }
     }
 }

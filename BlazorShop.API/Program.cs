@@ -32,6 +32,7 @@ builder.Services.AddDbContext<AppDbContext>(op =>
                             op.UseSqlServer(builder.Configuration.GetConnectionString("Defaultconnection1")));
 
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<ICarrinhoCompraRepository, CarrinhoCompraRepository>();
 
 builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 

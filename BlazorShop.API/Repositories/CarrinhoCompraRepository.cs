@@ -13,9 +13,20 @@ namespace BlazorShop.API.Repositories
             _appDbContext = appDbContext;
         }
 
-        public Task<CarrinhoItem> AdicionaItem(CarrinhoItemDTO itemDTO)
+        public async Task<CarrinhoItem> AdicionaItem(CarrinhoItemDTO itemDTO)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Carrinho car = new Carrinho();
+                car = itemDTO;
+
+                var carrinho = await _appDbContext.Carrinho.Add(itemDTO);
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
         }
 
         public Task<CarrinhoItem> AtualizaQuantidade(int id, CarrinhoItemAtualizaQuantidade carrinhoItemAtualiza)
