@@ -11,8 +11,8 @@
         public string ProdutoDescricao { get; set; } = string.Empty;
         public string ProdutoImagemURL { get; set; } = string.Empty;
 
-        public decimal Preco { get; set; }
-        public decimal PrecoTotal { get; set; }
+        public decimal? Preco { get; set; }
+        public decimal? PrecoTotal { get; set; }
 
 
     }

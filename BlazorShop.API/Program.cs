@@ -34,7 +34,7 @@ builder.Services.AddDbContext<AppDbContext>(op =>
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<ICarrinhoCompraRepository, CarrinhoCompraRepository>();
 
-builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
+// builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 
 
 var app = builder.Build();
