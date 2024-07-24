@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BlazorShop.API.Entities;
 using BlazorShop.API.Mappings;
 using BlazorShop.API.Repositories;
 using BlazorShop.Models.DTOs;
@@ -48,6 +49,59 @@ namespace BlazorShop.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-       
+
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<CarrinhoItemDTO>> GetItem(int id)
+        {
+            try
+            {
+                var carrinhoItem = await _carrinhoCompraRepository.GetItem(id);
+
+                if (carrinhoItem == null)
+                {
+                    return NotFound($"Item não encontrado"); // not found 404 status code
+                }
+
+                var produtos = await _produtoRepository.GetById(carrinhoItem.Id) ?? throw new Exception("Não existe produtos ....");
+
+                var carrinhosItensDTO = carrinhoItem.ConverterCarrinhoItemParaDto(produtos);
+                return Ok(carrinhosItensDTO);
+
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<CarrinhoItemDTO>> PostItem([FromBody] CarrinhoItemAdicionaDTO carrinho)
+        {
+            try
+            {
+                var carrinhoItem = await _carrinhoCompraRepository.AdicionaItem(carrinho);
+
+                if (carrinhoItem == null)
+                {
+                    return NotFound($"Item não encontrado"); // not found 404 status code
+                }
+
+                var produtos = await _produtoRepository.GetById(carrinhoItem.Id) ?? throw new Exception("Não existe produtos ....");
+
+                var carrinhosItensDTO = carrinhoItem.ConverterCarrinhoItemParaDto(produtos);
+
+                return CreatedAtAction(actionName: nameof(GetItem), new { id = carrinhosItensDTO.Id }, carrinhosItensDTO);
+
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+
     }
 }
