@@ -57,9 +57,17 @@ namespace BlazorShop.API.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<CarrinhoItem> GetItem(int id)
+        public async Task<CarrinhoItem> GetItem(int id)
         {
-            throw new NotImplementedException();
+            return await (from carrinhoItem in _appDbContext.CarrinhoItem
+                          where carrinhoItem.Id == id
+                          select new CarrinhoItem
+                          {
+                              Id = carrinhoItem.Id,
+                              ProdutoId = carrinhoItem.ProdutoId,
+                              Quantidade = carrinhoItem.Quantidade,
+                              CarrinhoId = carrinhoItem.CarrinhoId
+                          }).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<CarrinhoItem>> GetItems(int usuarioId)
