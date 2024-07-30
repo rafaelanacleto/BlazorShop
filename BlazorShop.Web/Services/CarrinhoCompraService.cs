@@ -21,9 +21,23 @@ namespace BlazorShop.Web.Services
         {
             try
             {
-                var carrinho = await _restClient.GetFromJsonAsync<List<CarrinhoItemDTO>>($"api/CarrinhoCompra/{idUsuario}/GetItens"); 
+                //envia um request GET para URI da API CarrinhoCompra
+                var resp = await _restClient.GetAsync($"api/CarrinhoCompra/{idUsuario}/GetItens");
 
-                return carrinho.ToList();
+                if (resp.IsSuccessStatusCode)
+                {
+                    if (resp.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        return Enumerable.Empty<CarrinhoItemDTO>().ToList();
+                    }
+
+                    return await resp.Content.ReadFromJsonAsync<List<CarrinhoItemDTO>>();
+                }
+                else
+                {
+                    var message = await resp.Content.ReadAsStringAsync();
+                    throw new Exception(message);
+                }                
             }
             catch (Exception ex)
             {
