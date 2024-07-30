@@ -12,9 +12,34 @@ namespace BlazorShop.Web.Services
             _restClient = restClient;
         }
 
-        public Task<CarrinhoItemDTO> AdicionaItem(CarrinhoItemAdicionaDTO itemDTO)
+        public async Task<CarrinhoItemDTO> AdicionaItem(CarrinhoItemAdicionaDTO itemDTO)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //envia um request GET para URI da API CarrinhoCompra
+                var resp = await _restClient.PostAsJsonAsync<CarrinhoItemAdicionaDTO>("api/CarrinhoCompra", itemDTO);
+
+                if (resp.IsSuccessStatusCode)
+                {
+                    if (resp.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        return default(CarrinhoItemDTO);
+                    }
+
+                    return await resp.Content.ReadFromJsonAsync<CarrinhoItemDTO>();
+                }
+                else
+                {
+                    //serializada o conteudo HTTP como uma string
+                    var message = await resp.Content.ReadAsStringAsync();
+                    throw new Exception(message);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+                throw;
+            }
         }
 
         public async Task<List<CarrinhoItemDTO>> GetItens(int idUsuario)

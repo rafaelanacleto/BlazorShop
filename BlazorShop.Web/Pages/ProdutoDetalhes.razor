@@ -29,7 +29,15 @@ else
                     </b>
                 </p>
                 <div>
-                    <button class="btn btn-success">Incluir Carrinho</button>       &nbsp;
+                    <button class="btn btn-success"
+                        @onclick="() => AdicionarAoCarrinho_Click(
+                            new CarrinhoItemAdicionaDTO {
+                                CarrinhoId = 1,
+                                ProdutoId = Produto.Id,
+                                Quantidade = 1
+                            })">
+                        Incluir Carrinho
+                    </button>       &nbsp;
                     <button class="btn btn-warning" @onclick=GetDetalhes>Voltar</button>
                 </div>
             </div>
@@ -47,6 +55,9 @@ else
 
     [Inject]
     private NavigationManager _navigationManager { get; set; }
+
+    [Inject]
+    public ICarrinhoCompraService? CarrinhoCompraService { get; set; }
 
     [Parameter]
     public int Id { get; set; }
@@ -71,6 +82,18 @@ else
     private async Task GetDetalhes()
     {
         _navigationManager.NavigateTo($"/produto");
+    }
+
+    protected async Task AdicionarAoCarrinho_Click(CarrinhoItemAdicionaDTO carrinhoItem)
+    {
+        try
+        {
+            var carr = await CarrinhoCompraService.AdicionaItem(carrinhoItem);
+        }
+        catch (Exception)
+        {            
+            throw;
+        }
     }
 
     // private async Task<ProdutoDto> GetProdutoPorId(int id)
