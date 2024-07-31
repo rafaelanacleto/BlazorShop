@@ -9,8 +9,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 
 var baseUrl = "https://localhost:7198/";
-var baseUrl2 = "http://localhost:5184/";
-
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(baseUrl) });
 builder.Services.AddScoped<IProdutoService, ProdutoService>();

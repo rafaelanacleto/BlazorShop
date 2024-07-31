@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace BlazorShop.API.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class CarrinhoCompraController : ControllerBase
     {

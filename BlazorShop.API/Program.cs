@@ -13,12 +13,10 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("http://localhost:7250",
-                                "https://localhost:7250",
-                                "https://localhost:7198",
-                                "http://localhost:5045")
+            policy.WithOrigins("https://localhost:7250")
             .AllowAnyMethod()
             .AllowAnyHeader()
+            .WithHeaders(HeaderNames.Accept, "text/plain")
             .WithHeaders(HeaderNames.ContentType, "application/json");
         });
 });
@@ -34,9 +32,6 @@ builder.Services.AddDbContext<AppDbContext>(op =>
 
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<ICarrinhoCompraRepository, CarrinhoCompraRepository>();
-
-// builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
-
 
 var app = builder.Build();
 
