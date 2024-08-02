@@ -16,11 +16,8 @@ namespace BlazorShop.Web.Services
         {
             try
             {
-                //envia um request GET para URI da API CarrinhoCompra
-                
+                //envia um request POst para URI da API CarrinhoCompra                
                 var resp = await _restClient.PostAsJsonAsync<CarrinhoItemAdicionaDTO>("api/CarrinhoCompra", itemDTO);
-
-                resp.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");    //teste apagar depois
 
                 if (resp.IsSuccessStatusCode)
                 {
