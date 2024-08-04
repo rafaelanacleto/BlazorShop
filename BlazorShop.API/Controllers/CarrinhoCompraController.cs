@@ -78,7 +78,7 @@ namespace BlazorShop.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CarrinhoItemDTO>> PostItem([FromBody] CarrinhoItemAdicionaDTO carrinho)
+        public async Task<ActionResult<CarrinhoItemDTO>> PostItem(CarrinhoItemAdicionaDTO carrinho)
         {
             try
             {
@@ -94,6 +94,34 @@ namespace BlazorShop.API.Controllers
                 var carrinhosItensDTO = carrinhoItem.ConverterCarrinhoItemParaDto(produtos);
 
                 return CreatedAtAction(actionName: nameof(GetItem), new { id = carrinhosItensDTO.Id }, carrinhosItensDTO);
+
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<CarrinhoItemDTO>> DeletaItem(int id)
+        {
+            try
+            {
+                var carrinhoItem = await _carrinhoCompraRepository.DeletaItem(id);
+                
+                if (carrinhoItem == null)
+                {
+                    return NotFound();
+                }
+
+                var produto = await _produtoRepository.GetById(carrinhoItem.ProdutoId);
+
+                if (produto is null)
+                    return NotFound();
+
+                var carrinhoItemDto = carrinhoItem.ConverterCarrinhoItemParaDto(produto);
+                return Ok(carrinhoItemDto);
 
             }
             catch (System.Exception ex)

@@ -16,7 +16,7 @@ namespace BlazorShop.Web.Services
         {
             try
             {
-                //envia um request GET para URI da API CarrinhoCompra
+                //envia um request POst para URI da API CarrinhoCompra                
                 var resp = await _restClient.PostAsJsonAsync<CarrinhoItemAdicionaDTO>("api/CarrinhoCompra", itemDTO);
 
                 if (resp.IsSuccessStatusCode)
@@ -70,5 +70,23 @@ namespace BlazorShop.Web.Services
                 throw;
             }
         }
+
+        public async Task<CarrinhoItemDTO> DeletaItem(int id)
+        {
+            try
+            {
+                var response = await _restClient.DeleteAsync($"api/CarrinhoCompra/{id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<CarrinhoItemDTO>();
+                }
+                return default(CarrinhoItemDTO);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
