@@ -1,6 +1,31 @@
-@page "/carrinhocompra"
+@page "/carrinhocompra/{Id:int}"
+
+
+
+
 
 @code {
 
+    [Inject]
+    public ICarrinhoCompraService carrinhoCompraService {get; set;}
+    public List<CarrinhoItemDTO> carrinhoItemDTOs {get; set;}
+    public string? MensagemErro {get; set;}   
+    [Parameter]
+    public int Id { get; set; } 
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        try {
+
+            var carrinho = carrinhoCompraService.GetItens(Id);
+        }
+        catch(Exception ex) {
+            throw;
+        }
+    }
+
+
+
     
-}
+}  
