@@ -1,14 +1,64 @@
 @page "/carrinhocompra/{Id:int}"
 
+<PageTitle>Carrinho Compra</PageTitle>
 
+@if(carrinhoItemDTOs is null && MensagemErro is null)
+{
+    <ExibirSpinner />
+}
+else if (MensagemErro is not null)
+{
+    <ExibirErro MensagemErro="@MensagemErro"></ExibirErro>
+}
+else 
+{
+    <div>
+        <h3 class="mb-5">Detalhes do carrinho </h3> 
+        
+        @if(carrinhoItemDTOs.Count > 0)
+        {
+            foreach(var item in carrinhoItemDTOs)
+            {
+                 <div class="row">
+                    <div class="col-md-6 mb-4">
+                    ID - @item.ProdutoId
+                    </div>
+                    <div class="col-md-6">
+                        Nome - @item.ProdutoNome
+                    </div>
+                    
+                    <hr/>
+                    
+                    <div>
+                        <button class="btn btn-danger sm">Excluir</button>
+                    </div>
+                </div>   
+            }
 
+            <div class="col-md-3">
+                <h5>Carrinho - Resumo</h5>
+                <div class="mt-2">
+                    <div>Total - (2 items)&nbsp;<br /><b>34</b></div>
+                    <a href="#" class="btn btn-success">
+                        <span class="oi oi-credit-card"></span>&nbsp; Fechar Pedido
+                    </a>
+                </div>
+            </div>
 
+        }
+        else
+        {
+            <div>Seu Carrinho está vazio :-( </div>
+        }
+       
+    </div>
+}
 
 @code {
 
     [Inject]
-    public ICarrinhoCompraService carrinhoCompraService {get; set;}
-    public List<CarrinhoItemDTO> carrinhoItemDTOs {get; set;}
+    public ICarrinhoCompraService? carrinhoCompraService {get; set;}
+    public List<CarrinhoItemDTO>? carrinhoItemDTOs {get; set;}
     public string? MensagemErro {get; set;}   
     [Parameter]
     public int Id { get; set; } 
@@ -18,14 +68,10 @@
     {
         try {
 
-            var carrinho = carrinhoCompraService.GetItens(Id);
+            carrinhoItemDTOs = await carrinhoCompraService.GetItens(Id);
         }
         catch(Exception ex) {
-            throw;
+            MensagemErro = ex.Message;
         }
     }
-
-
-
-    
 }  

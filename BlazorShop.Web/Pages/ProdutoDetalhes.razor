@@ -94,6 +94,10 @@ else
         {            
             throw;
         }
+        finally
+        {
+            _navigationManager.NavigateTo($"/carrinhocompra/1");
+        }
     }
 
     // private async Task<ProdutoDto> GetProdutoPorId(int id)
