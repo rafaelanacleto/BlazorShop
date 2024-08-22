@@ -1,4 +1,5 @@
 @page "/carrinhocompra/{Id:int}"
+@inject IJSRuntime Js;
 
 <PageTitle>Carrinho Compra</PageTitle>
 
@@ -12,66 +13,120 @@ else if (MensagemErro is not null)
 }
 else 
 {
-    <div>
-        <h3 class="mb-5">Detalhes do carrinho </h3> 
-        
-        @if(carrinhoItemDTOs.Count > 0)
-        {
-            foreach(var item in carrinhoItemDTOs)
-            {
-                 <div class="row">
-                    <div class="col-md-6 mb-4">
-                    ID - @item.ProdutoId
+    <h3 class="mb-5">Carrinho</h3>
+    @if (CarrinhoCompraItens.Count() > 0)
+    {
+        <div class="row mb-5">
+            <div class="col-md-9">
+                @foreach (var item in CarrinhoCompraItens)
+                {
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <img src="@item.ProdutoImagemURL" width="250" class="img-thumbnail">
+                        </div>
+                        <div class="col-md-9">
+                            <h5>@item.ProdutoNome</h5>
+                            <div class="mb-4">
+                                @item.ProdutoDescricao
+                            </div>
+                            <span>Preço: <b>@item.Preco.ToString("C")</b>
+                                <input @oninput="()=>AtualizaQuantidade_Input(item.Id)" type="number" @bind="@item.Quantidade" />
+                                <button data-itemId="@item.Id"  class="btn btn-info btn-sm atualizaquantidade" @onclick="(()=> AtualizaQuantidadeCarrinhoItem_Click(item.Id, item.Quantidade))">
+                               <i class="oi oi-check"></i>
+                            </button>
+                            <br>
+                            <button @onclick = "(()=> DeletaCarrinhoItem_Click(item.Id))" class="btn btn-danger sm">
+                                <span class="oi oi-trash"></span>
+                             </button>
+                            </span>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        Nome - @item.ProdutoNome
-                    </div>
-                    
-                    <hr/>
-                    
-                    <div>
-                        <button class="btn btn-danger sm">Excluir</button>
-                    </div>
-                </div>   
-            }
-
+                }
+            </div>
             <div class="col-md-3">
                 <h5>Carrinho - Resumo</h5>
                 <div class="mt-2">
-                    <div>Total - (2 items)&nbsp;<br /><b>34</b></div>
+                    <div>Total - (@QuantidadeTotal items)&nbsp;<br /><b>@PrecoTotal</b></div>
                     <a href="#" class="btn btn-success">
                         <span class="oi oi-credit-card"></span>&nbsp; Fechar Pedido
                     </a>
                 </div>
             </div>
-
-        }
-        else
-        {
-            <div>Seu Carrinho está vazio :-( </div>
-        }
-       
-    </div>
+        </div>
+    }
+    else
+    {
+       <div>
+               <h3><b>Seu carrinho esta vazio</b></h3>
+       </div>
+    }
 }
 
 @code {
 
+    [Inject]    
+    public ICarrinhoCompraService? CarrinhoCompraService { get; set; }
+
+    public List<CarrinhoItemDTO>? CarrinhoCompraItens { get; set; }
+
+    public string? MensagemErro { get; set; }
+
+    protected string? PrecoTotal { get; set; }
+    protected int QuantidadeTotal { get; set; }
+
     [Inject]
-    public ICarrinhoCompraService? carrinhoCompraService {get; set;}
-    public List<CarrinhoItemDTO>? carrinhoItemDTOs {get; set;}
-    public string? MensagemErro {get; set;}   
-    [Parameter]
-    public int Id { get; set; } 
+    public IGerenciaCarrinhoItensLocalStorageService?
+                 GerenciaCarrinhoItensLocalStorageService   { get; set; }
 
 
     protected override async Task OnInitializedAsync()
     {
         try {
 
-            carrinhoItemDTOs = await carrinhoCompraService.GetItens(Id);
+            CarrinhoCompraItens = await CarrinhoCompraService.GetItens(Id);
         }
         catch(Exception ex) {
             MensagemErro = ex.Message;
         }
     }
+
+
+     private void SetPrecoTotal()
+    {
+        PrecoTotal = CarrinhoCompraItens.Sum(p => p.PrecoTotal).ToString("C");
+    }
+    private void SetQuantidadeTotal()
+    {
+        QuantidadeTotal = CarrinhoCompraItens.Sum(p => p.Quantidade);
+    }
+
+    private void CalculaResumoCarrinhoTotal()
+    {
+        SetPrecoTotal();
+        SetQuantidadeTotal();
+    }
+
+      private async Task AtualizaPrecoTotalItem(CarrinhoItemDTO carrinhoItemDto)
+    {
+        var item = GetCarrinhoItem(carrinhoItemDto.Id);
+
+        if (item != null)
+        {
+            item.PrecoTotal = carrinhoItemDto.Preco * carrinhoItemDto.Quantidade;
+        }
+
+        await GerenciaCarrinhoItensLocalStorageService.SaveCollection(CarrinhoCompraItens);
+    }
+
+    protected async Task AtualizaQuantidade_Input(int id)
+    {
+        await Js.InvokeVoidAsync("TornaBotaoAtualizarQuantidadeVisivel", id, true);
+    }
+
+    private void CarrinhoChanged()
+    {
+        CalculaResumoCarrinhoTotal();
+        CarrinhoCompraService.RaiseEventOnCarrinhoCompraChanged(QuantidadeTotal);
+    }
+
 }  
