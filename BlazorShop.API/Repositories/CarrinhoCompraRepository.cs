@@ -14,7 +14,7 @@ namespace BlazorShop.API.Repositories
             _appDbContext = appDbContext;
         }
 
-        public async Task<CarrinhoItem> AdicionaItem(CarrinhoItemAdicionaDTO itemDTO)
+        public async Task<CarrinhoItem> AdicionaItem(CarrinhoItemAdicionaDto itemDTO)
         {
             
             if(await CarrinhoItemJaExiste(itemDTO.CarrinhoId, itemDTO.ProdutoId) == false)

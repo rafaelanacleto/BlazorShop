@@ -5,7 +5,7 @@ namespace BlazorShop.API.Repositories
 {
     public interface ICarrinhoCompraRepository
     {
-        Task<CarrinhoItem> AdicionaItem(CarrinhoItemAdicionaDTO itemDTO);
+        Task<CarrinhoItem> AdicionaItem(CarrinhoItemAdicionaDto itemDTO);
         Task<CarrinhoItem> AtualizaQuantidade(int id, CarrinhoItemAtualizaQuantidade carrinhoItemAtualiza);
         Task<CarrinhoItem> DeletaItem(int id);
         Task<CarrinhoItem> GetItem(int id);

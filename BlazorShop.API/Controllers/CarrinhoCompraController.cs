@@ -78,7 +78,7 @@ namespace BlazorShop.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CarrinhoItemDTO>> PostItem(CarrinhoItemAdicionaDTO carrinho)
+        public async Task<ActionResult<CarrinhoItemDTO>> PostItem(CarrinhoItemAdicionaDto carrinho)
         {
             try
             {

@@ -31,7 +31,7 @@ else
                 <div>
                     <button class="btn btn-success"
                         @onclick="() => AdicionarAoCarrinho_Click(
-                            new CarrinhoItemAdicionaDTO {
+                            new CarrinhoItemAdicionaDto {
                                 CarrinhoId = 1,
                                 ProdutoId = Produto.Id,
                                 Quantidade = 1
@@ -84,7 +84,7 @@ else
         _navigationManager.NavigateTo($"/produto");
     }
 
-    protected async Task AdicionarAoCarrinho_Click(CarrinhoItemAdicionaDTO carrinhoItem)
+    protected async Task AdicionarAoCarrinho_Click(CarrinhoItemAdicionaDto carrinhoItem)
     {
         try
         {
