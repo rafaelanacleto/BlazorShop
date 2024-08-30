@@ -3,24 +3,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlazorShop.Models.DTOs;
+using Blazored.LocalStorage;
 
 namespace BlazorShop.Web.Services
 {
     public class GerenciaCarrinhoItensLocalStorageService : IGerenciaCarrinhoItensLocalStorageService
     {
-        public Task<List<CarrinhoItemDTO>> GetCollection()
+
+        const string key = "CarrinhoItemCollection";
+
+        private readonly ILocalStorageService localStorageService;
+        private readonly ICarrinhoCompraService carrinhoCompraService;
+
+
+        public GerenciaCarrinhoItensLocalStorageService(ILocalStorageService localStorageService,
+        ICarrinhoCompraService carrinhoCompraService)
         {
-            throw new NotImplementedException();
+            this.localStorageService = localStorageService;
+            this.carrinhoCompraService = carrinhoCompraService;
         }
 
-        public Task RemoveCollection()
+        public async Task<List<CarrinhoItemDTO>> GetCollection()
         {
-            throw new NotImplementedException();
+            return await this.localStorageService.GetItemAsync<List<CarrinhoItemDTO>>(key) ?? await AddCollection();
         }
 
-        public Task SaveCollection(List<CarrinhoItemDTO> carrinhoItensDto)
+        public async Task RemoveCollection()
         {
-            throw new NotImplementedException();
+            await this.localStorageService.RemoveItemAsync(key);
         }
+
+        public async Task SaveCollection(List<CarrinhoItemDTO> carrinhoItensDto)
+        {
+            await this.localStorageService.SetItemAsync(key, carrinhoItensDto);
+        }
+
+
+        //obtem os dados do servidor e armazena no localstorage
+        private async Task<List<CarrinhoItemDTO>> AddCollection()
+        {
+            var carrinhoCompraCollection = await this.carrinhoCompraService
+                                              .GetItens(UsuarioLogado.UsuarioId);
+
+            if (carrinhoCompraCollection != null)
+            {
+                await this.localStorageService.SetItemAsync(key, carrinhoCompraCollection);
+            }
+            return carrinhoCompraCollection;
+        }
+
+
     }
 }

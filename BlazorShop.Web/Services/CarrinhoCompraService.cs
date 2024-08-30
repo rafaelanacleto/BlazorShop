@@ -7,17 +7,19 @@ namespace BlazorShop.Web.Services
     {
         private readonly HttpClient _restClient;
 
+        public event Action<int> OnCarrinhoCompraChanged;
+
         public CarrinhoCompraService(HttpClient restClient)
         {
             _restClient = restClient;
         }
 
-        public async Task<CarrinhoItemDTO> AdicionaItem(CarrinhoItemAdicionaDTO itemDTO)
+        public async Task<CarrinhoItemDTO> AdicionaItem(CarrinhoItemAdicionaDto itemDTO)
         {
             try
             {
                 //envia um request POst para URI da API CarrinhoCompra                
-                var resp = await _restClient.PostAsJsonAsync<CarrinhoItemAdicionaDTO>("api/CarrinhoCompra", itemDTO);
+                var resp = await _restClient.PostAsJsonAsync<CarrinhoItemAdicionaDto>("api/CarrinhoCompra", itemDTO);
 
                 if (resp.IsSuccessStatusCode)
                 {
@@ -88,5 +90,19 @@ namespace BlazorShop.Web.Services
             }
         }
 
+        public Task<List<CarrinhoItemDTO>> GetItens(string usuarioId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<CarrinhoItemDTO> AtualizaQuantidade(CarrinhoItemAtualizaQuantidadeDto carrinhoItemAtualizaQuantidadeDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RaiseEventOnCarrinhoCompraChanged(int totalQuantidade)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
