@@ -90,11 +90,6 @@ namespace BlazorShop.Web.Services
             }
         }
 
-        public Task<List<CarrinhoItemDTO>> GetItens(string usuarioId)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<CarrinhoItemDTO> AtualizaQuantidade(CarrinhoItemAtualizaQuantidadeDto carrinhoItemAtualizaQuantidadeDto)
         {
             throw new NotImplementedException();
