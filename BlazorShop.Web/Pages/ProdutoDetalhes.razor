@@ -59,6 +59,14 @@ else
     [Inject]
     public ICarrinhoCompraService? CarrinhoCompraService { get; set; }
 
+    [Inject]
+    public IGerenciaProdutosLocalStorageService?
+                GerenciaProdutosLocalStorageService { get; set; }
+
+    [Inject]
+    public IGerenciaCarrinhoItensLocalStorageService?
+                  GerenciaCarrinhoItensLocalStorageService { get; set; }
+
     [Parameter]
     public int Id { get; set; }
 
@@ -89,6 +97,13 @@ else
         try
         {
             var carr = await CarrinhoCompraService.AdicionaItem(carrinhoItem);
+
+            if (carr != null)
+            {
+                CarrinhoCompraItens.Add(carr);
+                await GerenciaCarrinhoItensLocalStorageService.SaveCollection(CarrinhoCompraItens);
+            }
+
         }
         catch (Exception)
         {            
