@@ -12,8 +12,8 @@ using Microsoft.Extensions.Logging;
 
 namespace BlazorShop.API.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class CarrinhoCompraController : ControllerBase
     {
         private readonly ILogger<CarrinhoCompraController> _logger;
