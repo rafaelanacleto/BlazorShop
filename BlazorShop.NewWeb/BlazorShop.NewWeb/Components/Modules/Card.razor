@@ -5,7 +5,7 @@
     <div class="card-body">
         <h5 class="card-title">@Title</h5>
         <p class="card-text">@Text</p>
-        <button class="btn btn-primary" @onclick="OnClick">Go somewhere</button>
+        <button class="btn btn-primary" @onclick="EventClick">Go somewhere</button>
     </div>
 </div>
 
@@ -19,6 +19,9 @@
 
     [Parameter]
     public string? Text { get; set; } = "With supporting text below as a natural lead-in to additional content";
+
+    [Parameter]
+    public EventCallback EventClick { get; set; }
 
     public void OnClick()
     {

@@ -1,10 +1,21 @@
 @page "/component"
+@rendermode InteractiveServer
+@inject IJSRuntime JS
 
-<Card Title="Titulo" Header="Cacecario" Text="Texto que vai dentro do card, o conteudo em si" />
+<Card Title="Titulo" Header="Cacecario" Text="Texto que vai dentro do card, o conteudo em si" EventClick="Click1" />
 <br />
-<Card Title="Outro Titulo" Header="Header Novo" Text="Outro texto do outro card" />
+<Card Title="Outro Titulo" Header="Header Novo" Text="Outro texto do outro card" EventClick="Click2" />
 
 
 @code {
 
+    public void Click1()
+    {
+        JS.InvokeVoidAsync("alert", "Card 1");
+    }
+
+    public void Click2()
+    {
+        JS.InvokeVoidAsync("alert", "Card 2");
+    }
 }
