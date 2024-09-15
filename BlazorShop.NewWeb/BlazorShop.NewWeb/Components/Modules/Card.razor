@@ -4,11 +4,16 @@
     <h5 class="card-header">@Header</h5>
     <div class="card-body">
 
+        @if(ChildContent != null)
+        {
+            @ChildContent
+        }else
+        {
+            <h5 class="card-title shadow-sm p-3 mb-5 bg-white rounded">@Title</h5>
+            <p class="card-text">@Text</p>
+            <button class="btn btn-primary" @onclick="EventClick">Go somewhere</button>            
+        }
 
-
-        <h5 class="card-title">@Title</h5>
-        <p class="card-text">@Text</p>
-        <button class="btn btn-primary" @onclick="EventClick">Go somewhere</button>
     </div>
 </div>
 
@@ -16,6 +21,9 @@
 
     [Parameter]
     public string? Header { get; set; } = "Featured";
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
     [Parameter]
     public string? Title { get; set; } = "Special title treatment";
