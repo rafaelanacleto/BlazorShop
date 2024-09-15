@@ -1,12 +1,25 @@
+@InteractiveServer
+
 <div class="card">
-  <h5 class="card-header">Featured</h5>
+  <h5 class="card-header">@Header</h5>
   <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <h5 class="card-title">@Title</h5>
+    <p class="card-text">@Text</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 </div>
 
 @code {
+
+  [Parameter]
+  public string? Header {get; set;} = "Featured";
+
+  [Parameter]
+  public string? Title {get; set;} = "Special title treatment";
+
+  [Parameter]
+  public string? Text {get; set;} = "With supporting text below as a natural lead-in to additional content";
+  
+    
 
 }
