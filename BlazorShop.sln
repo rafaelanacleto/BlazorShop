@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorShop.Web", "BlazorSho
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorShop.NewWeb", "BlazorShop.NewWeb", "{F188213E-CD30-4D0F-8BEA-3485672F06F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorShop.NewWeb", "BlazorShop.NewWeb\BlazorShop.NewWeb\BlazorShop.NewWeb.csproj", "{93CCD551-2E8A-45BF-B73F-F55AEE79B7C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorShop.NewWeb", "BlazorShop.NewWeb\BlazorShop.NewWeb\BlazorShop.NewWeb.csproj", "{93CCD551-2E8A-45BF-B73F-F55AEE79B7C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorShop.NewWeb.Client", "BlazorShop.NewWeb\BlazorShop.NewWeb.Client\BlazorShop.NewWeb.Client.csproj", "{10AF9E92-4B98-4C1A-9862-45F0E2C3BF37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorShop.NewWeb.Client", "BlazorShop.NewWeb\BlazorShop.NewWeb.Client\BlazorShop.NewWeb.Client.csproj", "{10AF9E92-4B98-4C1A-9862-45F0E2C3BF37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,11 +45,11 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {94805EB1-9F38-4731-894D-DC75BDB13E37}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{93CCD551-2E8A-45BF-B73F-F55AEE79B7C3} = {F188213E-CD30-4D0F-8BEA-3485672F06F5}
 		{10AF9E92-4B98-4C1A-9862-45F0E2C3BF37} = {F188213E-CD30-4D0F-8BEA-3485672F06F5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {94805EB1-9F38-4731-894D-DC75BDB13E37}
 	EndGlobalSection
 EndGlobal
