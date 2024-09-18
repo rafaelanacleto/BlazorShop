@@ -1,5 +1,6 @@
 using BlazorShop.NewWeb.Client.Pages;
 using BlazorShop.NewWeb.Components;
+using BlazorShop.NewWeb.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddSingleton<NumeroAleatorio>();
 
 var app = builder.Build();
 

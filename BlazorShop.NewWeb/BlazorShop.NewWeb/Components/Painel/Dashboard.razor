@@ -1,3 +1,20 @@
 ﻿@page "/dashboard"
 
+@inject NumeroAleatorio num
+@inject NumeroAleatorio num2
+
 <h3>Dashboard</h3>
+
+<div class="row">
+    <div class="col-6">
+        Valor 1: @num.NumeroIdentificador
+    </div>
+     <div class="col-6">
+        Valor 2: @num2.NumeroIdentificador
+    </div>
+</div>
+
+@code {
+    public int numero {get; set;}
+
+}

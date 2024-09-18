@@ -2,14 +2,12 @@
 @rendermode InteractiveServer
 @inject IJSRuntime JS
 
-
 <div class="row">
     <div class="col-sm-3">
         <Card Title="Titulo"
               Header="Cacecario"
               Text="Texto que vai dentro do card, o conteudo em si"
               EventClick="Click1" />
-
     </div>
     <div class="col-sm-3">
         <Card Title="Outro Titulo"
@@ -23,25 +21,20 @@
               Text="Outro texto do outro card"
               EventClick="Click2" />
     </div>
-
     <div class="col-sm-3">
         <Card Header="FragmentChild">
             <h4>Eu sou o clid content</h4>
-            <p>Olá mundo </p>
+            <p>Ola mundo </p>
             <button class="btn btn-outline-warning" @onclick="Click2">Clique</button>
         </Card>
     </div>
-
-
 </div>
 
 <div class="row">
     <div class="col-sm-3">
         <InputString />
-
     </div>
 </div>
-
 
 @code {
 
