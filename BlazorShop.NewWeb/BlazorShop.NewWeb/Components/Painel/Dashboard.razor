@@ -2,15 +2,19 @@
 
 @inject NumeroAleatorio num
 @inject NumeroAleatorio num2
+@inject MensagemSMS sms
 
 <h3>Dashboard</h3>
 
 <div class="row">
-    <div class="col-6">
+    <div class="col-3">
         Valor 1: @num.NumeroIdentificador
     </div>
-     <div class="col-6">
+     <div class="col-3">
         Valor 2: @num2.NumeroIdentificador
+    </div>
+    <div class="col-3">
+        Valor 3: @sms.Enviar("hello")
     </div>
 </div>
 
