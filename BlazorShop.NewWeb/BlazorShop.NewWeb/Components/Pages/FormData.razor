@@ -20,7 +20,7 @@
 				<input type="checkbox" class="form-check-input" id="exampleCheck1">
 				<label class="form-check-label" for="exampleCheck1">Check me out</label>
 			</div>
-			<Button Type="primary">Hello World!</Button>
+			<Button Type="primary" @onclick="exibeMensagem()">Hello World!</Button>
 		</form>
 	</div>
 </div>
@@ -28,5 +28,11 @@
 @code {
 	private int Id { get; set; }
 	private string? Email { get; set; }
+
+
+	public void exibeMensagem()
+	{
+		Email = "OutroEmail@terra.com.br"
+	}
 
 }
