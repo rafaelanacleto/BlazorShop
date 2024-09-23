@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorShop.NewWeb.Client\BlazorShop.NewWeb.Client.csproj" />
+    <PackageReference Include="AntDesign" Version="0.20.4.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
   </ItemGroup>
 

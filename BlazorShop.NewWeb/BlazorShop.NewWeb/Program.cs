@@ -9,6 +9,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
+builder.Services.AddAntDesign();
+
 builder.Services.AddSingleton<NumeroAleatorio>();
 builder.Services.AddScoped<IMensagem, MensagemSMS>();
 
