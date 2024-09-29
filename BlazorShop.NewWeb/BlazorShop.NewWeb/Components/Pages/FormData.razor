@@ -3,21 +3,30 @@
 
 <div class="container-md">
 	<div class="row-cols-3">
-				<label for="exampleInputEmail1">Email address</label>
-				<input type="email" @bind-value="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-			
-			<button class="btn btn-dark" @onclick="exibeMensagem">Mudar Email Padrão</button>
+		<label for="exampleInputEmail1">Email address</label>
+		<input type="email" @bind-value="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+		<br />
+		<label for="exampleInputSenha">Senha</label>
+		<input type="password" @bind-value="Senha" class="form-control" id="exampleInputSenha" placeholder="Enter senha">
+		<br />
+		<button class="btn btn-dark" @onclick="exibeMensagem">Mudar Email Padrão</button>
+	</div>
+	<hr />
+	<div class="alert alert-info">
+		<span>@Mensagem</span>
 	</div>
 </div>
 
 @code {
 	private int Id { get; set; }
 	private string? Email { get; set; }
+	private string? Senha { get; set; }
+	private string? Mensagem { get; set; } = string.Empty;
 
 
 	public void exibeMensagem()
 	{
-		Email = "OutroEmail@terra.com.br";
+		Mensagem = "Login executado com sucesso!!";
 	}
 
 }
