@@ -9,12 +9,15 @@
 		<label for="exampleInputSenha">Senha</label>
 		<input type="password" @bind-value="Senha" class="form-control" id="exampleInputSenha" placeholder="Enter senha">
 		<br />
-		<button class="btn btn-dark" @onclick="exibeMensagem">Mudar Email Padrão</button>
+		<button class="btn btn-dark mt-3" @onclick="exibeMensagem">Login</button>
 	</div>
 	<hr />
-	<div class="alert alert-info">
-		<span>@Mensagem</span>
-	</div>
+	@if (!string.IsNullOrEmpty(Mensagem))
+	{
+		<div class="alert alert-info">
+			<span>@Mensagem</span>
+		</div>
+	}
 </div>
 
 @code {
