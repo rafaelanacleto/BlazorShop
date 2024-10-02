@@ -1,22 +1,27 @@
 ﻿@page "/form/data"
 @rendermode InteractiveServer
 
-<EditForm Model="@Usuario" OnSubmit="exibeMensagem">
+<EditForm Model="@Usuario" OnSubmit="exibeMensagem" FormName="login">
 	<div class="container-md">
+		<DataAnnotationsValidator />
+		<ValidationSummary></ValidationSummary>
 		<div class="row-cols-3">
-			<label for="exampleInputEmail1">Email address</label>
-			<input type="email" @bind-value="Usuario.Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+			<label for="exampleInputEmail1">Email</label>
+			<InputText type="email" @bind-Value="Usuario.Email" class="form-control" id="exampleInputEmail1"
+				aria-describedby="emailHelp" placeholder="Enter email" />
+				<ValidationMessage For="() => Usuario.Email" ></ValidationMessage>
 			<br />
 			<label for="exampleInputSenha">Senha</label>
-			<input type="password" @bind-value="Usuario.Senha" class="form-control" id="exampleInputSenha" placeholder="Enter senha">
+			<InputText type="password" @bind-Value="Usuario.Senha" class="form-control" id="exampleInputSenha"
+				placeholder="Enter senha" />
 			<br />
 			<button class="btn btn-dark mt-3" type="submit">Login</button>
 		</div>
 		<hr />
 		@if (!string.IsNullOrEmpty(Mensagem))
 		{
-			<div class="alert alert-info">
-				<span>@Mensagem -> USuario: @Usuario.Email -> Senha: @Usuario.Senha</span>
+			<div class=@(TipoMensagem)>
+				<span>@Mensagem</span>
 			</div>
 		}
 	</div>
@@ -27,12 +32,22 @@
 	private string? Email { get; set; }
 	private string? Senha { get; set; }
 	private string? Mensagem { get; set; } = string.Empty;
-	private Usuario Usuario {get; set; } = new Usuario();
+	private string? TipoMensagem { get; set; } = "alert alert-info";
+	private Usuario Usuario { get; set; } = new Usuario();
 
 
-	public void exibeMensagem()
+	public void exibeMensagem(EditContext context)
 	{
-		Mensagem = "Login executado com sucesso!!";
+		if (context.Validate())
+		{
+			TipoMensagem = "alert alert-info";
+			Mensagem = "Login executado com sucesso!!";
+		}
+		else{
+			TipoMensagem = "alert alert-danger";
+			Mensagem = "Erro ao realizar login";	
+
+		}
 	}
 
 }
