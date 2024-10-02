@@ -1,30 +1,33 @@
 ﻿@page "/form/data"
 @rendermode InteractiveServer
 
-<div class="container-md">
-	<div class="row-cols-3">
-		<label for="exampleInputEmail1">Email address</label>
-		<input type="email" @bind-value="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-		<br />
-		<label for="exampleInputSenha">Senha</label>
-		<input type="password" @bind-value="Senha" class="form-control" id="exampleInputSenha" placeholder="Enter senha">
-		<br />
-		<button class="btn btn-dark mt-3" @onclick="exibeMensagem">Login</button>
-	</div>
-	<hr />
-	@if (!string.IsNullOrEmpty(Mensagem))
-	{
-		<div class="alert alert-info">
-			<span>@Mensagem</span>
+<EditForm Model="@Usuario" OnSubmit="exibeMensagem">
+	<div class="container-md">
+		<div class="row-cols-3">
+			<label for="exampleInputEmail1">Email address</label>
+			<input type="email" @bind-value="Usuario.Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+			<br />
+			<label for="exampleInputSenha">Senha</label>
+			<input type="password" @bind-value="Usuario.Senha" class="form-control" id="exampleInputSenha" placeholder="Enter senha">
+			<br />
+			<button class="btn btn-dark mt-3" type="submit">Login</button>
 		</div>
-	}
-</div>
+		<hr />
+		@if (!string.IsNullOrEmpty(Mensagem))
+		{
+			<div class="alert alert-info">
+				<span>@Mensagem -> USuario: @Usuario.Email -> Senha: @Usuario.Senha</span>
+			</div>
+		}
+	</div>
+</EditForm>
 
 @code {
 	private int Id { get; set; }
 	private string? Email { get; set; }
 	private string? Senha { get; set; }
 	private string? Mensagem { get; set; } = string.Empty;
+	private Usuario Usuario {get; set; } = new Usuario();
 
 
 	public void exibeMensagem()
