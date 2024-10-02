@@ -1,7 +1,7 @@
 ﻿@page "/form/data"
 @rendermode InteractiveServer
 
-<EditForm Model="@Usuario" OnSubmit="exibeMensagem" FormName="login">
+<EditForm Model="@Usuario" OnValidSubmit="exibeMensagem" FormName="login">
 	<div class="container-md">
 		<DataAnnotationsValidator />
 		<ValidationSummary></ValidationSummary>
